@@ -1,0 +1,143 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f3f3f3;
+}
+
+h1 {
+  text-align: center;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto 30px auto;
+}
+
+form input, form button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+form button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+form button:hover {
+  background-color: #1976D2;
+}
+
+.map-container {
+  max-width: 800px; /* você pode ajustar para 600px, 700px, etc */
+  margin: 0 auto;
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+  border: 3px solid #5a5a5a;
+  border-radius: 8px;
+}
+
+#lista-usuarios {
+  list-style: none;
+  padding-left: 0;
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+}
+
+#lista-usuarios li {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+}
+
+/* Modal padrão */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999; /* aumentar para ficar acima do mapa */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+/* Botão de fechar */
+.close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Estilo dos botões principais */
+button {
+  padding: 10px 15px;
+  background-color: #2196F3;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1976D2;
+}
+
+/* Responsividade do mapa */
+@media (max-width: 768px) {
+  .map-container {
+    max-width: 95%;
+  }
+
+  #map {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  #map {
+    height: 250px;
+  }
+}
+
+
