@@ -49,7 +49,7 @@ form button:hover {
 }
 
 .map-container {
-  max-width: 800px; /* você pode ajustar para 600px, 700px, etc */
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -75,11 +75,10 @@ form button:hover {
   border-radius: 5px;
 }
 
-/* Modal padrão */
 .modal {
   display: none;
   position: fixed;
-  z-index: 9999; /* aumentar para ficar acima do mapa */
+  z-index: 9999;
   left: 0;
   top: 0;
   width: 100%;
@@ -87,7 +86,7 @@ form button:hover {
   background-color: rgba(0,0,0,0.5);
 }
 
-/* Conteúdo do modal */
+
 .modal-content {
   background-color: #fff;
   margin: 10% auto;
@@ -98,7 +97,7 @@ form button:hover {
   position: relative;
 }
 
-/* Botão de fechar */
+
 .close {
   position: absolute;
   right: 15px;
@@ -108,7 +107,6 @@ form button:hover {
   cursor: pointer;
 }
 
-/* Estilo dos botões principais */
 button {
   padding: 10px 15px;
   background-color: #2196F3;
@@ -123,7 +121,6 @@ button:hover {
   background-color: #1976D2;
 }
 
-/* Responsividade do mapa */
 @media (max-width: 768px) {
   .map-container {
     max-width: 95%;
