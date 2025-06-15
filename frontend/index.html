@@ -8,11 +8,11 @@
 
 </head>
 <body>
-
+<div class="pagina">
 <div style="text-align: center; margin-bottom: 20px;">
   <button onclick="abrirModal('modal-login')">Entrar</button>
   <button onclick="abrirModal('modal-usuario')">Cadastrar Usuário</button>
-  <button onclick="abrirModal('modal-ecoponto')">Cadastrar Ecoponto</button>
+  <button id="botao-abrir-ecoponto" onclick="abrirModal('modal-ecoponto')">Cadastrar</button>
   <p id="user-logado" style="margin-top: 10px;"></p>
 </div>
 
@@ -35,10 +35,18 @@
     <form id="form-usuario">
       <input type="text" id="usuario-nome" placeholder="Nome" required>
       <input type="email" id="usuario-email" placeholder="Email" required>
+
+      <label for="usuario-role">Tipo de usuário:</label>
+      <select id="usuario-role" required>
+        <option value="COMUM">Comum</option>
+        <option value="ADMIN">Administrador</option>
+      </select>
+
       <button type="submit">Cadastrar</button>
     </form>
   </div>
 </div>
+
 
 <div id="modal-ecoponto" class="modal">
   <div class="modal-content">
@@ -50,20 +58,55 @@
       <input type="text" placeholder="Tipo de Resíduos" id="residuos" required>
       <input type="number" step="any" placeholder="Latitude" id="latitude" required>
       <input type="number" step="any" placeholder="Longitude" id="longitude" required>
-      <button type="submit">Cadastrar</button>
+      <button id="botao-abrir-ecoponto" onclick="abrirModal('modal-ecoponto')">Cadastrar</button>
     </form>
   </div>
 </div>
 
-<h2>Mapa de Ecopontos</h2>
+<section id="conscientizacao" class="conscientizacao">
+  <h2>Por que Reciclar?</h2>
+  <p style="text-align: justify;">
+    A reciclagem é fundamental para preservar o meio ambiente, reduzindo a quantidade de resíduos enviados aos aterros e diminuindo a exploração de recursos naturais. Ao separar corretamente seus resíduos e utilizar os ecopontos disponíveis, você ajuda a construir cidades mais limpas e sustentáveis para as futuras gerações.
+  </p>
+</section>
+<section id="ecologia" class="educacao-ecologica">
+
+  <div class="ecologia-conteudo">
+    <h2>Dicas e Curiosidades sobre Sustentabilidade</h2>
+    <ul>
+      <li>♻️ <strong>1 tonelada de papel reciclado</strong> evita o corte de cerca de 20 árvores adultas.</li>
+      <li>🔄 <strong>Latas de alumínio</strong> podem ser recicladas infinitamente; o Brasil reaproveita mais de 97% delas.</li>
+      <li>♨️ <strong>Garrafas PET</strong> demoram até 400 anos para se decompor, mas podem virar tecidos e utensílios.</li>
+      <li>🗑️ O Brasil gera <strong>80 milhões de toneladas de lixo por ano</strong>, mas recicla menos de 4%.</li>
+      <li>🌱 <strong>Separar resíduos orgânicos</strong> evita contaminação e aumenta a taxa de reaproveitamento.</li>
+      <li>💧 <strong>Óleo de cozinha usado</strong> pode ser transformado em sabão ou biodiesel.</li>
+      <li>🌍 <strong>Reciclar papel</strong> economiza água, energia e reduz a poluição do ar.</li>
+      <li>🌿 <strong>Plásticos reciclados</strong> podem ser usados na construção civil, móveis e até roupas.</li>
+      <li>🌞 <strong>Energia solar</strong> e eólica são alternativas sustentáveis que reduzem a dependência de combustíveis fósseis.</li>
+      <li>🚮 <strong>Reduzir, Reutilizar e Reciclar</strong> são os 3 Rs da sustentabilidade.</li>
+      <li>🌳 <strong>Plantar árvores</strong> ajuda a combater a poluição e melhora a qualidade do ar.</li>
+      
+    </ul>
+    <p class="mensagem-final">
+      🌍 Faça sua parte. Recicle, reutilize e compartilhe essas ideias. Juntos, transformamos nossas cidades em lugares mais limpos e conscientes!
+    </p>
+  </div>
+</section>
+
+
+
 <div class="map-container">
+  <h2>Mapa de Ecopontos</h2>
   <div id="map"></div>
 </div>
-<h2>Lista de Ecopontos</h2>
-<div id="ecoponto-lista" class="lista"></div>
+
+<div class="section-lista">
+  <h2>Lista de Ecopontos</h2>
+  <div id="ecoponto-lista" class="lista"></div>
+</div>
 
 
-
+</div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>

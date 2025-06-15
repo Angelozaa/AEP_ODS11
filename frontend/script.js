@@ -3,13 +3,23 @@ const LOGIN_API = 'http://localhost:8080/api/usuarios/login';
 function atualizarUIUsuario() {
   const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
   const userLogado = document.getElementById('user-logado');
+  const botaoCadastrarEcoponto = document.getElementById('botao-abrir-ecoponto');
 
   if (usuario) {
     userLogado.innerHTML = `Usuário logado: <strong>${usuario.nome}</strong> <button onclick="logout()">Sair</button>`;
+    
+    if (usuario.role === 'ADMIN') {
+      botaoCadastrarEcoponto.style.display = 'inline-block';
+    } else {
+      botaoCadastrarEcoponto.style.display = 'none';
+    }
+
   } else {
     userLogado.innerHTML = '';
+    botaoCadastrarEcoponto.style.display = 'none';
   }
 }
+
 
 
 function logout() {
@@ -51,12 +61,17 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let markersLayer = L.layerGroup().addTo(map);
 
 map.on('click', function (e) {
-  const { lat, lng } = e.latlng;
-  document.getElementById('latitude').value = lat.toFixed(6);
-  document.getElementById('longitude').value = lng.toFixed(6);
+  const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
 
-  setTimeout(() => abrirModal('modal-ecoponto'), 100);
+  // Verifica se o usuário está logado e se é ADMIN
+  if (usuario && usuario.role === 'ADMIN') {
+    const { lat, lng } = e.latlng;
+    document.getElementById('latitude').value = lat.toFixed(6);
+    document.getElementById('longitude').value = lng.toFixed(6);
+    setTimeout(() => abrirModal('modal-ecoponto'), 100);
+  }
 });
+
 
 function carregarEcopontos() {
   fetch(ECOPONTO_API)
@@ -95,7 +110,8 @@ document.getElementById('form-usuario').addEventListener('submit', function (e) 
 
   const usuario = {
     nome: document.getElementById('usuario-nome').value,
-    email: document.getElementById('usuario-email').value
+    email: document.getElementById('usuario-email').value,
+    role: document.getElementById('usuario-role').value  // <- novo campo
   };
 
   fetch(USUARIO_API, {
@@ -115,8 +131,15 @@ document.getElementById('form-usuario').addEventListener('submit', function (e) 
     .catch(error => alert(error));
 });
 
+
 document.getElementById('form-ecoponto').addEventListener('submit', function (e) {
   e.preventDefault();
+
+  const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
+  if (!usuario || usuario.role !== 'ADMIN') {
+    alert('Apenas administradores podem cadastrar ecopontos.');
+    return;
+  }
 
   const novoEcoponto = {
     nome: document.getElementById('nome').value,
@@ -126,7 +149,7 @@ document.getElementById('form-ecoponto').addEventListener('submit', function (e)
     longitude: parseFloat(document.getElementById('longitude').value)
   };
 
-  fetch(ECOPONTO_API, {
+  fetch(`${ECOPONTO_API}?emailUsuario=${encodeURIComponent(usuario.email)}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(novoEcoponto)
@@ -142,6 +165,7 @@ document.getElementById('form-ecoponto').addEventListener('submit', function (e)
     })
     .catch(error => alert(error));
 });
+
 
 function abrirModal(id) {
   const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));

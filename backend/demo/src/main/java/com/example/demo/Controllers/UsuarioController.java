@@ -26,9 +26,17 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public UsuarioModel cadastrarUsuario(@RequestBody UsuarioModel usuario) {
-        return repository.save(usuario);
+    public ResponseEntity<?> cadastrarUsuario(@RequestBody UsuarioModel usuario) {
+        if (repository.findByEmail(usuario.getEmail()) != null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email já cadastrado");
+        }
+        if (usuario.getRole() == null) {
+            usuario.setRole("USER");
+        }
+        UsuarioModel salvo = repository.save(usuario);
+        return ResponseEntity.ok(salvo);
     }
+
 
     @PostMapping("/login")
     public ResponseEntity<UsuarioModel> login(@RequestBody UsuarioModel loginRequest) {
